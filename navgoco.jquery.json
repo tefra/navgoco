@@ -1,0 +1,31 @@
+{
+  "name": "navgoco",
+  "title": "Navgoco Menus",
+  "description": "Navgoco is a simple JQuery plugin which turns a nested unordered list of links into a beautiful vertical multi-level sliding navigation with options to remember sub-menus visible state between sessions or act as an accordion.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/tefra/navgoco",
+  "author": {
+    "name": "Chris T"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tefra/navgoco.git"
+  },
+  "bugs": "https://github.com/tefra/navgoco/issues",
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "https://github.com/tefra/navgoco/blob/master/LICENSE-BSD"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
+  "keywords": [
+	  "menu",
+	  "navigation",
+	  "slide",
+	  "cookies",
+	  "accordion"
+  ]
+}

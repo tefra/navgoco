@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{:navgoco}</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<!-- Demo page js and css files -->
+		<link rel="stylesheet" type="text/css" href="demo.css" media="screen" />
+		<script src="jquery.loader.js"></script>
+		<script src="highlight.pack.js"></script>
+
+		<!-- Add JQuery cookie plugin (optional) -->
+		<script src="../src/jquery.cookie.js"></script>
+		<!-- Add navgoco main js and css files  -->
+		<script type="text/javascript" src="../src/jquery.navgoco.js"></script>
+		<link rel="stylesheet" type="text/css" href="../src/jquery.navgoco.css" media="screen" />
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var demoMenu = arrayToUl(links);
+				// Remember state demo
+				$("#demo1").append(demoMenu);
+				$('#demo1 li').first().addClass('active');
+				// Initialize navgoco with default options
+				$("#demo1").navgoco({
+					caret: '<span class="caret"></span>',
+					accordion: false,
+					openClass: 'open',
+					save: true,
+					cookie: {
+						name: 'navgoco',
+						expires: false,
+						path: '/'
+					},
+					slide: {
+						duration: 400,
+						easing: 'swing'
+					}
+				});
+
+				$("#collapseAll").click(function(e) {
+					e.preventDefault();
+					$("#demo1").navgoco('collapse');
+				});
+
+
+				$("#expandAll").click(function(e) {
+					e.preventDefault();
+					$("#demo1").navgoco('expand');
+				});
+
+
+
+				// Accordion demo
+				$("#demo2").append(demoMenu);
+				$('#demo2 li').first().addClass('active');
+				$("#demo2").navgoco({accordion: true});
+				hljs.tabReplace = '    ';
+				hljs.initHighlightingOnLoad();
+			});
+
+			var links = {
+				"News and Events": [
+					"Hot News",
+					"RSS Feeds",
+					"Peach Events",
+					"User Groups"
+				],
+				"About": {
+					"Contact Us": [
+						"Support and Service",
+						"Product Feedback",
+						"Website Feedback"],
+					"0": "Public Relations",
+					"1": "Investors",
+					"2": "Working at Peach",
+					"3": "Environment",
+					"Working with Peach": [
+						"Procurement",
+						"Supplier Responsibility"
+					]
+				},
+				"Where to Buy": [
+					"Where can I buy Peach products?",
+					"Peach Online Store",
+					"Peach Store for Business",
+					"Peach Store for Education",
+					"Peach Online Store Country Selector",
+					"Peach Retail",
+					"Find a Reseller",
+					"Peach Financial Services", "Peach Rebates"
+				]
+			};
+
+			function arrayToUl(data) {
+				var html = '';
+				for (var key in data) {
+					html += '<li>';
+					var isInt = (parseInt(key) == key);
+					var label = isInt ? data[key] : key;
+					html += '<a href="#">' + label + '</a>';
+					if (!isInt) {
+						html += '<ul>';
+						html += arrayToUl(data[key]);
+						html += '</ul>';
+					}
+					html += '<li>';
+				}
+				return html;
+			}
+		</script>
+	</head>
+	<body>
+		<a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+		<div class="wrapper">
+			<h1 class="title">{:navgoco}</h1>
+			<section class="description">
+				Navgoco is a simple JQuery plugin which turns a nested unordered list of links into a beautiful vertical
+				multi-level sliding navigation with options to remember sub-menus visible state between sessions or act as an accordion.
+
+				<p>
+					<a class="btn" href="">Download</a>
+					<a class="btn" href="">Github</a>
+				</p>
+
+
+			</section>
+			<hr />
+			<section class="demo">
+				<h2>Demo: Remember state</h2>
+				<ul id="demo1" class="nav"></ul>
+				<p class="external">
+					<a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+				</p>
+				<h3>Javascript</h3>
+				<pre><code class="javascript">$(document).ready(function() {
+	// Setup navgoco menu with default options
+	$(&quot;#demo1&quot;).navgoco({
+		caret: &#39;&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&#39;,
+		accordion: false,
+		openClass: &#39;open&#39;,
+		save: true,
+		cookie: {
+			name: &#39;navgoco&#39;,
+			expires: false,
+			path: &#39;/&#39;
+		},
+		slide: {
+			duration: 400,
+			easing: &#39;swing&#39;
+		}
+	});
+});</code></pre>
+			</section>
+			<hr />
+			<section class="demo">
+				<h2>Demo: Accordion</h2>
+				<ul id="demo2" class="nav"></ul>
+				<h3>Javascript</h3>
+				<pre><code class="javascript">$(document).ready(function() {
+	// Setup navgoco accordion menu, cookie save is turned off automatically
+	$(&quot;#demo1&quot;).navgoco({accordion: true});
+});</code></pre>
+			</section>
+			<hr />
+
+		</div>
+		<footer class="copyright">
+			Copyright © <a href="http://www.komposta.net">Komposta.net</a> 2013 All Rights Reserved
+		</footer>
+
+
+
+	</body>
+</html>
