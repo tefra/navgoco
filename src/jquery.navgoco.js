@@ -1,6 +1,10 @@
-/* Navgoco - v0.1.0 - 2013-07-03
- * https://github.com/Tefra/navgoco
- * Copyright (c) 2013 Chris T; Licensed MIT */
+/*
+ * jQuery Navgoco Menus Plugin v0.1.0 (2013-07-05)
+ * https://github.com/tefra/navgoco
+ *
+ * Copyright (c) 2013 Chris T
+ * BSD - https://github.com/tefra/navgoco/blob/master/LICENSE-BSD
+ */
 (function($) {
 	"use strict";
 
@@ -9,6 +13,7 @@
 		this.$el = $(el);
 		this.opts = options;
 		this.uuid = this.$el.attr('id') ? this.$el.attr('id') : idx;
+		this.open = {};
 		this.init();
 		return this;
 	};
@@ -17,16 +22,17 @@
 		init: function() {
 			var self = this;
 			if (self.opts.save) {
-				var cookie = self._load();
+				self._load();
 			}
 			self.$el.find('ul').each(function(idx) {
 				var sub = $(this);
 				sub.data('index', idx);
-				if (self.opts.save && cookie.hasOwnProperty(idx)) {
+				if (self.opts.save && self.open.hasOwnProperty(idx)) {
 					sub.parent().addClass(self.opts.openClass);
 					sub.show();
 				} else if (sub.parent().hasClass(self.opts.openClass)) {
 					sub.show();
+					this.open[idx] = 1;
 				} else {
 					sub.hide();
 				}
@@ -39,92 +45,82 @@
 			parents.click(function(e) {
 				e.preventDefault();
 				var sub = $(this).next();
-				var open = sub.is(":visible");
-				self._toggle(sub, open);
-				if (self.opts.accordion) {
-					self._accordion(sub);
-				} else if (self.opts.save) {
-					self._update(sub, !open, true);
+				var isOpen = sub.is(":visible");
+				self._toggle(sub, !isOpen);
+				if (self.opts.save) {
+					self._saveCookie();
 				}
 			});
 		},
 		_toggle: function(sub, open) {
-			if (open) {
-				sub.parent().removeClass(this.opts.openClass);
-				sub.slideUp(this.opts.slide);
-			} else {
-				sub.parent().addClass(this.opts.openClass);
-				sub.slideDown(this.opts.slide);
-			}
-		},
-		_accordion: function(sub) {
 			var self = this;
-			var allowed = {};
-
-			allowed[sub.data('index')] = true;
-			sub.parent().parents("ul").each(function() {
-				allowed[$(this).data('index')] = true;
-			});
-
-			self.$el.find("ul:visible").each(function() {
-				var menu = $(this);
-				if (!allowed.hasOwnProperty(menu.data('index'))) {
-					menu.parent().removeClass(self.opts.openClass);
-					menu.slideUp(self.opts.slide);
-				}
-			});
-		},
-		_update: function(menu, open, save) {
-			var idx = menu.data('index');
+			var idx = sub.data('index');
 
 			if (open) {
-				cookie[this.uuid][idx] = 1;
+				sub.parent().addClass(self.opts.openClass);
+				sub.slideDown(self.opts.slide);
+				self.open[idx] = 1;
+
+				if (self.opts.accordion) {
+					var allowed = {};
+					allowed[idx] = 1;
+					sub.parent().parents("ul").each(function() {
+						var idx = $(this).data('index');
+						allowed[idx] = 1;
+						self.open[idx] = 1;
+					});
+
+					self.$el.find("ul:visible").each(function() {
+						var menu = $(this);
+						if (!allowed.hasOwnProperty(menu.data('index'))) {
+							self._toggle(menu, false);
+						}
+					});
+				}
+
 			} else {
-				delete cookie[this.uuid][idx];
-			}
-			if (save) {
-				this._save();
+				sub.parent().removeClass(self.opts.openClass);
+				sub.slideUp(self.opts.slide);
+				this.open[idx] = 0;
 			}
 		},
-		_save: function() {
+
+		_saveCookie: function() {
+			var save = {};
+			for(var key in this.open) {
+				if(this.open[key] === 1) {
+					save[key] = 1;
+				}
+			}
+			cookie[this.uuid] = save;
 			$.cookie(this.opts.cookie.name, JSON.stringify(cookie), this.opts.cookie);
+		},
+		_resetCookie: function() {
+			cookie[this.uuid] = {};
 		},
 		_load: function() {
 			if (cookie === null) {
 				var data = $.cookie(this.opts.cookie.name);
 				cookie = (data) ? JSON.parse(data) : {};
 			}
-			if (!cookie.hasOwnProperty(this.uuid)) {
-				cookie[this.uuid] = {};
-			}
-			return cookie[this.uuid];
+			this.open = cookie.hasOwnProperty(this.uuid) ? cookie[this.uuid] : {};
 		},
 		collapse: function() {
 			var self = this;
-
-			self.$el.find('ul').each(function() {
-				self._toggle($(this), true);
+			self.$el.find('ul:visible').each(function() {
+				self._toggle($(this), false);
 			});
-
 			if (self.opts.save) {
-				cookie[self.uuid] = {};
-				self._save();
+				self._saveCookie();
 			}
 		},
 		expand: function() {
 			var self = this;
-			var submenus = self.$el.find('ul');
-
-			submenus.each(function() {
-				var sub = $(this);
-				self._toggle(sub, false);
-				if (self.opts.save) {
-					self._update(sub, true, false);
-				}
+			self.$el.find('ul').each(function() {
+				self._toggle($(this), true);
 			});
-
 			if (self.opts.save) {
-				self._save();
+				self._saveCookie();
 			}
 		}
 	};
@@ -150,7 +146,7 @@
 		var callback = typeof options === 'string';
 		if (!callback) {
 			options = $.extend({}, defaults, options || {});
-			if (options.accordion || !$.cookie) {
+			if (!$.cookie) {
 				options.save = false;
 			}
 		}
