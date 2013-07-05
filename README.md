@@ -1,6 +1,9 @@
 # {:navgoco}
 
-Navgoco is a simple JQuery plugin which turns a nested unordered list of links into a beautiful vertical multi-level sliding navigation with options to remember sub-menus visible state between sessions or act as an accordion.
+Navgoco is a simple JQuery plugin which turns a nested unordered list of links
+into a beautiful vertical multi-level sliding navigation with options to remember
+sub-menus visible state between sessions or act as an accordion. *[Demo](http://demos.komposta.net/jquery/navgoco/demo/index.html)*
+
 
 ## Getting Started
 Download the plugin, unzip it and copy the files to your application directory and load them inside your HTML.
@@ -12,7 +15,7 @@ Download the plugin, unzip it and copy the files to your application directory a
 		<!-- Load jquery.cookie plugin (optional) -->
 		<script type="text/javascript" src="/navgoco/src/jquery.cookie.js"></script>
 		<!-- Load jquery.navgoco plugin js and css files -->
-		<script type="text/javascript" src="/navgoco/src/jquery.navgoco.min.js"></script>
+		<script type="text/javascript" src="/navgoco/src/jquery.navgoco.js"></script>
         <link rel="stylesheet" href="/navgoco/src/jquery.navgoco.css" type="text/css" media="screen" />
     </head>
 ```
@@ -66,20 +69,52 @@ You can also extend the default options:
 
 You can pass these options as key/value object during activation to alter the default behaviour.
 
-```javascript
-var defaults = {
-		caret: '<span class="caret"></span>', // This will be added inside parent links
-		accordion: false, // Enable accordion mode
-		openClass: 'open', // css class to be added in open parent li elements
-		save: true,  // Enable remember state, this will be turned off automatically if cookie plugin isn't included or accordion mode is on.
-		cookie: {
-			name: 'navgoco', // Cookie's name to store visible states
-			expires: false, // Cookie's lifespan in days. If omitted storage will be deleted between sessions.
-			path: '/' // Cookie's path where is valid
-		},
-		slide: {
-			duration: 400, // Slide duration in milliseconds
-			easing: 'swing' // A string indicating which easing (linear|swing) function to use for the transition.
-		}
-	};
-```
+----------
+
+#### caret
+Type: `string`
+Default `<span class="caret"></span>`
+
+Raw html appended into parent links.
+
+#### accordion
+Type: `boolean`
+Default `false`
+
+Enable accordion mode.
+
+----------
+
+#### openClass:
+Type: `string`
+Default `open`
+
+Css class to be added in open parent li.
+
+----------
+
+#### save:
+
+Type: `object`
+Default `true`
+
+Save state between sessions, if cookie plugin is not included it will be automatically turned off.
+
+----------
+
+#### cookie:
+Type: `object`
+
+  * Cookie options
+    * `name`:		Cookie name, Type: `string`, Default: `navgoco`
+    * `expires`:	Cookie lifespan in days, `false` will make it a session cookie, Type: `boolean`, Default: `false`
+    * `path`:		Cookie path where is valid, Type: `string`, Default: `/`
+
+----------
+
+#### slide:
+Type: `object`
+
+  * Slide options
+    * `duration`:	Slide duration in milliseconds, Type: `integer`, Default: `400`
+    * `easing`:	Slide easing function (linear|swing) for the transition, Type: `string`, Default: `swing`
