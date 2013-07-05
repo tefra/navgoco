@@ -48,7 +48,7 @@
 				var isOpen = sub.is(":visible");
 				self._toggle(sub, !isOpen);
 				if (self.opts.save) {
-					self._saveCookie();
+					self._save();
 				}
 			});
 		},
@@ -84,11 +84,10 @@
 				this.open[idx] = 0;
 			}
 		},
-
-		_saveCookie: function() {
+		_save: function() {
 			var save = {};
-			for(var key in this.open) {
-				if(this.open[key] === 1) {
+			for (var key in this.open) {
+				if (this.open[key] === 1) {
 					save[key] = 1;
 				}
 			}
@@ -111,7 +110,7 @@
 				self._toggle($(this), false);
 			});
 			if (self.opts.save) {
-				self._saveCookie();
+				self._save();
 			}
 		},
 		expand: function() {
@@ -120,7 +119,7 @@
 				self._toggle($(this), true);
 			});
 			if (self.opts.save) {
-				self._saveCookie();
+				self._save();
 			}
 		}
 	};
