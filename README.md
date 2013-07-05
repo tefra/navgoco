@@ -2,7 +2,7 @@
 
 Navgoco is a simple JQuery plugin which turns a nested unordered list of links
 into a beautiful vertical multi-level sliding navigation with options to remember
-sub-menus visible state between sessions or act as an accordion. *[Demo](http://demos.komposta.net/jquery/navgoco/demo/index.html)*
+sub-menus visible state between sessions and act as an accordion. *[Demo](http://apps.komposta.net/jquery/navgoco/demo/index.html)*
 
 
 ## Getting Started
