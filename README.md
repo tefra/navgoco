@@ -1,9 +1,9 @@
 # {:navgoco}
 
 Navgoco is a simple JQuery plugin which turns a nested unordered list of links
-into a beautiful vertical multi-level sliding navigation with options to remember
-sub-menus visible state between sessions and act as an accordion. *[Demo](http://apps.komposta.net/jquery/navgoco/demo/index.html)*
-
+into a beautiful vertical multi-level slide navigation, with ability to preserve
+expanded submenus between sessions by using cookies and optionally act as an accordion
+menu. *[Demo](http://apps.komposta.net/jquery/navgoco/demo/index.html)*
 
 ## Getting Started
 Download the plugin, unzip it and copy the files to your application directory and load them inside your HTML.
@@ -73,13 +73,14 @@ You can pass these options as key/value object during activation to alter the de
 
 #### caret
 Type: `string`
-Default `<span class="caret"></span>`
+Default: `<span class="caret"></span>`
 
-Raw html appended into parent links.
+Raw html appended into parent links. example:
+`<a href="#link">Item<span class="carent"></span></a>`
 
 #### accordion
 Type: `boolean`
-Default `false`
+Default: `false`
 
 Enable accordion mode.
 
@@ -87,18 +88,18 @@ Enable accordion mode.
 
 #### openClass:
 Type: `string`
-Default `open`
+Default: `open`
 
-Css class to be added in open parent li.
+CSS class to be added in open parent li.
 
 ----------
 
 #### save:
 
 Type: `object`
-Default `true`
+Default: `true`
 
-Save state between sessions, if cookie plugin is not included it will be automatically turned off.
+Preserve expanded submenus between session. If jquery.cookie is not included it will be automatically turned off.
 
 ----------
 
@@ -106,9 +107,9 @@ Save state between sessions, if cookie plugin is not included it will be automat
 Type: `object`
 
   * Cookie options
-    * `name`:		Cookie name, Type: `string`, Default: `navgoco`
-    * `expires`:	Cookie lifespan in days, `false` will make it a session cookie, Type: `boolean`, Default: `false`
-    * `path`:		Cookie path where is valid, Type: `string`, Default: `/`
+    * `name`: Cookie name, Type: `string`, Default: `navgoco`
+    * `expires`: Cookie lifespan in days, `false` is a session cookie, Type: `integer`, Default: `false`
+    * `path`: Cookie path where is valid, Type: `string`, Default: `/`
 
 ----------
 
