@@ -1,5 +1,5 @@
 /*
- * jQuery Navgoco Menus Plugin v0.1.0 (2013-07-07)
+ * jQuery Navgoco Menus Plugin v0.1.1 (2013-07-08)
  * https://github.com/tefra/navgoco
  *
  * Copyright (c) 2013 Chris T
@@ -82,27 +82,6 @@
 				this.open[idx] = 0;
 			}
 		},
-		toggle: function(flag) {
-			var self = this;
-			var list = Array.prototype.slice.call(arguments, 1);
-			var only = {};
-
-			for (var i = 0; i < list.length; i++) {
-				only[list[i]] = true;
-			}
-
-			self.$el.find('ul').each(function() {
-				var sub = $(this);
-				var idx = sub.attr('data-index');
-				if (!only.length || only.hasOwnProperty(idx)) {
-					self._toggle(sub, flag);
-					if (only.length === 1) {
-						return false;
-					}
-				}
-			});
-			self._save();
-		},
 		_save: function() {
 			if (this.options.save) {
 				var save = {};
@@ -124,6 +103,32 @@
 				this.open = cookie.hasOwnProperty(this.uuid) ? cookie[this.uuid] : {};
 			}
 		},
+		toggle: function(open) {
+			var self = this;
+			var list = {};
+			var args = Array.prototype.slice.call(arguments, 1);
+			var length = args.length;
+
+			for (var i = 0; i < length; i++) {
+				list[args[i]] = true;
+			}
+
+			self.$el.find('ul').each(function() {
+				var sub = $(this);
+				var idx = sub.attr('data-index');
+				if (length === 0 || list.hasOwnProperty(idx)) {
+					self._toggle(sub, open);
+					if (length === 1) {
+						return false;
+					}
+				}
+			});
+			self._save();
+		},
+		destroy: function() {
+			$.removeData(this.$el);
+			this.$el.find("li:has(ul) > a").unbind('click');
+		}
 	};
 
 	var cookie = null;
@@ -134,7 +139,7 @@
 		save: true,
 		cookie: {
 			name: 'navgoco',
-			expires: false,
+			expires: 0,
 			path: '/'
 		},
 		slide: {
@@ -144,8 +149,8 @@
 	};
 
 	$.fn.navgoco = function(options) {
-		var method = (typeof options === 'string' && options.charAt(0) !== '_');
-		if (method) {
+		if (typeof options === 'string' && options.charAt(0) !== '_' && options !== 'init') {
+			var callback = true;
 			var args = Array.prototype.slice.call(arguments, 1);
 		} else {
 			options = $.extend({}, defaults, options || {});
@@ -156,10 +161,12 @@
 		return this.each(function(idx) {
 			var $this = $(this);
 			var obj = $this.data('navgoco');
-			if (method && obj) {
+			if (!obj) {
+				obj = new Plugin(this, callback ? defaults : options, idx);
+				$this.data('navgoco', obj);
+			}
+			if (callback) {
 				obj[options].apply(obj, args);
-			} else if (!obj && !method) {
-				$this.data('navgoco', new Plugin(this, options, idx));
 			}
 		});
 	};
