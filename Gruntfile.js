@@ -29,6 +29,9 @@ module.exports = function(grunt) {
 		},
 		uglify: {
 			dist: {
+				options: {
+					banner: '<%= banner %>'
+				},
 				files: {
 					'src/jquery.navgoco.min.js': ['src/jquery.navgoco.js'],
 				}
