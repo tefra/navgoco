@@ -39,16 +39,13 @@
 
 				$("#collapseAll").click(function(e) {
 					e.preventDefault();
-					$("#demo1").navgoco('collapse');
+					$("#demo1").navgoco('toggle', false);
 				});
-
 
 				$("#expandAll").click(function(e) {
 					e.preventDefault();
-					$("#demo1").navgoco('expand');
+					$("#demo1").navgoco('toggle', true);
 				});
-
-
 
 				// Accordion demo
 				$("#demo2").append(demoMenu);
@@ -110,17 +107,18 @@
 		</script>
 	</head>
 	<body>
-		<a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+		<a href="https://github.com/tefra/navgoco/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 		<div class="wrapper">
 			<h1 class="title">{:<a href="http://www.komposta.net/article/navgoco">navgoco</a>}</h1>
 			<section class="description">
 				Navgoco is a simple JQuery plugin which turns a nested unordered
-				list of links into a beautiful vertical	multi-level sliding navigation
-				with options to remember sub-menus visible state between sessions
-				and act as an accordion. <a href="https://github.com/tefra/navgoco/blob/master/README.md">readme</a>
+				list of links into a beautiful vertical multi-level slide navigation,
+				with ability to preserve expanded submenus between sessions by using
+				cookies and optionally act as an accordion menu.
+				<a href="https://github.com/tefra/navgoco/blob/master/README.md">readme</a>
 				<p>
-					<iframe src="http://ghbtns.com/github-btn.html?user=tefra&repo=navgoco&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
-					<iframe src="http://ghbtns.com/github-btn.html?user=tefra&repo=navgoco&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+					<iframe src="http://ghbtns.com/github-btn.html?user=tefra&repo=navgoco&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="85" height="20"></iframe>
+					<iframe src="http://ghbtns.com/github-btn.html?user=tefra&repo=navgoco&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="85" height="20"></iframe>
 					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.komposta.net/article/navgoco" data-text="Navgoco: JQuery plugin for beautiful vertical multi-level slide menus." data-hashtags="navgoco">Tweet</a>
 					<script>!function(d, s, id) {
 							var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
@@ -176,8 +174,5 @@
 		<footer class="copyright">
 			Copyright © <a href="http://www.komposta.net">Komposta.net</a> 2013 All Rights Reserved
 		</footer>
-
-
-
 	</body>
 </html>
