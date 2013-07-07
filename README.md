@@ -1,9 +1,12 @@
+![alt text](https://github.com/tefra/navgoco/raw/master/demo/navgoco.jpg "{:navgoco}")
+
+
 # {:navgoco}
 
 Navgoco is a simple JQuery plugin which turns a nested unordered list of links
 into a beautiful vertical multi-level slide navigation, with ability to preserve
-expanded submenus between sessions by using cookies and optionally act as an accordion
-menu. *[Demo](http://apps.komposta.net/jquery/navgoco/demo/index.html)*
+expanded sub-menus between sessions by using cookies and optionally act as an accordion
+menu. **[Demo](http://apps.komposta.net/jquery/navgoco/demo/index.html)**
 
 ## Getting Started
 Download the plugin, unzip it and copy the files to your application directory and load them inside your HTML.
@@ -72,50 +75,90 @@ You can pass these options as key/value object during activation to alter the de
 ----------
 
 #### caret
-Type: `string`
-Default: `<span class="caret"></span>`
+  * **Type:** `string`
+  * **Default:** `<span class="caret"></span>`
 
-Raw html appended into parent links. example:
+Raw html appended into parent links:
 `<a href="#link">Item<span class="carent"></span></a>`
 
 #### accordion
-Type: `boolean`
-Default: `false`
+  * **Type:** `boolean`
+  * **Default:** `false`
 
 Enable accordion mode.
 
 ----------
 
 #### openClass:
-Type: `string`
-Default: `open`
+  * **Type:** `string`
+  * **Default:** `open`
 
 CSS class to be added in open parent li.
 
 ----------
 
 #### save:
+  * **Type:** `object`
+  * **Default:** `true`
 
-Type: `object`
-Default: `true`
-
-Preserve expanded submenus between session. If jquery.cookie is not included it will be automatically turned off.
+Preserve expanded sub-menus between session. If jquery.cookie is not included it will be automatically turned off.
 
 ----------
 
 #### cookie:
-Type: `object`
+  * **Type:** `object`
+    * `name`: Cookie name
+      * *Type:* `string`
+      * *Default:* `navgoco`
+    * `expires`: Lifespan in days, `0` makes it a session cookie
+      * *Type:* `integer`
+      * *Default:* `false`
+    * `path`: Path where cookie is valid
+      * *Type:* `string`
+      * *Default:* `/`
 
-  * Cookie options
-    * `name`: Cookie name, Type: `string`, Default: `navgoco`
-    * `expires`: Cookie lifespan in days, `false` is a session cookie, Type: `integer`, Default: `false`
-    * `path`: Cookie path where is valid, Type: `string`, Default: `/`
 
 ----------
 
 #### slide:
-Type: `object`
+  * **Type:** `object`
+    * `duration`: Slide duration in milliseconds
+      * *Type:* `integer`
+      * *Default:* `400`
+    * `easing`:	Slide easing function (linear|swing) for the transition
+      * *Type:* `string`
+      * *Default:* `swing`
 
-  * Slide options
-    * `duration`:	Slide duration in milliseconds, Type: `integer`, Default: `400`
-    * `easing`:	Slide easing function (linear|swing) for the transition, Type: `string`, Default: `swing`
+
+## Public Methods
+
+#### toggle
+Manually open or close sub-menus.
+
+  * Parameters:
+    * `boolean`: Show or hide
+    * `Variable list of indexes`: If omitted toggles **all sub-menus**
+      *  `integer`
+      *  `...`
+      *  `integer`
+
+```js
+// Show|Hide all sub-menus
+$(selector).navgoco('toggle', true|false);
+```
+
+```js
+// Show|Hide sub-menus with specific indexes
+// Make sure you include all parents, it won't do that for you
+$(selector).navgoco('toggle', true|false, 1, 2, ...);
+```
+
+----------
+
+#### destroy
+Destroy instances and unbind events.
+
+```js
+// I can't think of any other use except for testing...
+$(selector).navgoco('destroy');
+```
