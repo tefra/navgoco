@@ -1,5 +1,12 @@
 ## Changelog
 
+**v0.1.2** (July 9, 2013)
+
+* Added code documentation
+* Renamed CHANGELOG.MD to CHANGELOG.md so it can be parsed by github
+* Added QUnit tests
+
+----------
 
 **v0.1.1** (July 8, 2013)
 
