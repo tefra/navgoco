@@ -56,7 +56,7 @@ You can also extend the default options:
 			  save: true,
 			  cookie: {
 				  name: 'navgoco',
-				  expires: 0,
+				  expires: false,
 				  path: '/'
 			  },
 			  slide: {
@@ -110,9 +110,9 @@ Preserve expanded sub-menus between session. If jquery.cookie is not included it
     * `name`: Cookie name
       * *Type:* `string`
       * *Default:* `navgoco`
-    * `expires`: Lifespan in days, `0` makes it a session cookie
-      * *Type:* `integer`
-      * *Default:* `0`
+    * `expires`: Lifespan in days, `false` makes it a session cookie
+      * *Type:* `integer|false`
+      * *Default:* `false`
     * `path`: Path where cookie is valid
       * *Type:* `string`
       * *Default:* `/`
