@@ -2,9 +2,9 @@
 
 **v0.1.2** (July 9, 2013)
 
+* Updated toggle procedure to open parent sub-menus
 * Added code documentation
-* Renamed CHANGELOG.MD to CHANGELOG.md so it can be parsed by github
-* Added QUnit tests
+* Added qunit tests
 
 ----------
 
