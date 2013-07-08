@@ -56,7 +56,7 @@ You can also extend the default options:
 			  save: true,
 			  cookie: {
 				  name: 'navgoco',
-				  expires: false,
+				  expires: 0,
 				  path: '/'
 			  },
 			  slide: {
@@ -98,7 +98,7 @@ CSS class to be added in open parent li.
 ----------
 
 #### save:
-  * **Type:** `object`
+  * **Type:** `boolean`
   * **Default:** `true`
 
 Preserve expanded sub-menus between session. If jquery.cookie is not included it will be automatically turned off.
@@ -112,7 +112,7 @@ Preserve expanded sub-menus between session. If jquery.cookie is not included it
       * *Default:* `navgoco`
     * `expires`: Lifespan in days, `0` makes it a session cookie
       * *Type:* `integer`
-      * *Default:* `false`
+      * *Default:* `0`
     * `path`: Path where cookie is valid
       * *Type:* `string`
       * *Default:* `/`
