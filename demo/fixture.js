@@ -1,16 +1,32 @@
-function arrayToUl(data) {
-	var html = '';
+function repeat(pattern, count) {
+	if (count < 1)
+		return '';
+	var result = '';
+	while (count > 0) {
+		if (count & 1)
+			result += pattern;
+		count >>= 1, pattern += pattern;
+	}
+	return result;
+}
+
+function arrayToUl(data, depth) {
+	depth = (isNaN(depth) || depth == 0) ? 1 : depth;
+	var html = '',
+		il = repeat('\t', depth),
+		iu = repeat('\t', depth + 1);
+
 	for (var key in data) {
-		html += '<li>';
+		html += il + '<li>';
 		var isInt = (parseInt(key) == key);
 		var label = isInt ? data[key] : key;
 		html += '<a href="#">' + label + '</a>';
 		if (!isInt) {
-			html += '<ul>';
-			html += arrayToUl(data[key]);
-			html += '</ul>';
+			html += '\n' + iu + '<ul>\n';
+			html += arrayToUl(data[key], depth + 2);
+			html += iu + '</ul>\n' + il;
 		}
-		html += '<li>';
+		html += '</li>\n';
 	}
 	return html;
 }

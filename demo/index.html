@@ -8,6 +8,7 @@
 		<script src="../libs/jquery.loader.js"></script>
 		<script src="../libs/highlight.pack.js"></script>
 		<script src="fixture.js"></script>
+		<script src="demo.js"></script>
 
 		<!-- Add JQuery cookie plugin (optional) -->
 		<script src="../src/jquery.cookie.js"></script>
@@ -15,54 +16,48 @@
 		<script type="text/javascript" src="../src/jquery.navgoco.js"></script>
 		<link rel="stylesheet" type="text/css" href="../src/jquery.navgoco.css" media="screen" />
 
-		<script type="text/javascript">
-			$(document).ready(function() {
-				var demoMenu = arrayToUl(links);
-				// Remember state demo
-				$("#demo1").append(demoMenu);
-				$('#demo1 li').first().addClass('active');
-				// Initialize navgoco with default options
-				var test = $("#demo1").navgoco({
-					caret: '<span class="caret"></span>',
-					accordion: false,
-					openClass: 'open',
-					save: true,
-					cookie: {
-						name: 'navgoco',
-						expires: false,
-						path: '/'
-					},
-					slide: {
-						duration: 400,
-						easing: 'swing'
-					}
-				});
+<script type="text/javascript" id="demo1-javascript">
+$(document).ready(function() {
+	// Initialize navgoco with default options
+	$("#demo1").navgoco({
+		caret: '<span class="caret"></span>',
+		accordion: false,
+		openClass: 'open',
+		save: true,
+		cookie: {
+			name: 'navgoco',
+			expires: false,
+			path: '/'
+		},
+		slide: {
+			duration: 400,
+			easing: 'swing'
+		}
+	});
 
-				$("#collapseAll").click(function(e) {
-					e.preventDefault();
-					$("#demo1").navgoco('toggle', false);
-				});
+	$("#collapseAll").click(function(e) {
+		e.preventDefault();
+		$("#demo1").navgoco('toggle', false);
+	});
 
-				$("#expandAll").click(function(e) {
-					e.preventDefault();
-					$("#demo1").navgoco('toggle', true);
-				});
-
-				// Accordion demo
-				$("#demo2").append(demoMenu);
-				$('#demo2 li').first().addClass('active');
-				$("#demo2").navgoco({accordion: true});
-				hljs.tabReplace = '    ';
-				hljs.initHighlightingOnLoad();
-			});
-		</script>
+	$("#expandAll").click(function(e) {
+		e.preventDefault();
+		$("#demo1").navgoco('toggle', true);
+	});
+});
+</script>
+<script type="text/javascript" id="demo2-javascript">
+$(document).ready(function() {
+	$("#demo2").navgoco({accordion: true});
+});
+</script>
 	</head>
 	<body>
 		<a href="https://github.com/tefra/navgoco/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 		<div class="wrapper">
 			<h1 class="logo"><a href="http://www.komposta.net/article/navgoco">navgoco</a></h1>
 			<section class="description">
-				<span class="title">{:<a href="http://www.komposta.net/article/navgoco">navgoco</a>}</span> is a simple JQuery plugin which turns a nested unordered
+				<span class="navgoco">{:<a href="http://www.komposta.net/article/navgoco">navgoco</a>}</span> is a simple JQuery plugin which turns a nested unordered
 				list of links into a beautiful vertical multi-level slide navigation,
 				with ability to preserve expanded submenus between sessions by using
 				cookies and optionally act as an accordion menu.
@@ -90,48 +85,42 @@
 					</strong>
 				</p>
 			</section>
+
 			<hr />
-			<section class="demo">
-				<h2>Demo: Remember state</h2>
-				<ul id="demo1" class="nav"></ul>
-				<p class="external">
-					<a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
-				</p>
-				<strong>Javascript</strong>
-				<pre><code class="javascript">// Setup navgoco menu with default options
-$("#demo1").navgoco({
-	caret: '&lt;span class="caret"&gt;&lt;/span&gt;',
-	accordion: false,
-	openClass: 'open',
-	save: true,
-	cookie: {
-		name: 'navgoco',
-		expires: false,
-		path: '/'
-	},
-	slide: {
-		duration: 400,
-		easing: 'swing'
-	}
-});
 
-$("#collapseAll").click(function(e) {
-	e.preventDefault();
-	$("#demo1").navgoco('toggle', false);
-});
-
-$("#expandAll").click(function(e) {
-	e.preventDefault();
-	$("#demo1").navgoco('toggle', true);
-});</code></pre>
+			<section>
+				<ul class="tabs">
+					<li class="active"><a href="#">Default Settings</a></li>
+					<li><a href="#">Javascript</a></li>
+					<li><a href="#">Html</a></li>
+				</ul>
+				<div class="panes">
+					<div id="demo1-html">
+						<ul id="demo1" class="nav"></ul>
+<p class="external">
+	<a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+</p>
+					</div>
+					<pre><code class="javascript" data-source="demo1"></code></pre>
+					<pre><code class="html" data-source="demo1"></code></pre>
+				</div>
 			</section>
+
 			<hr />
-			<section class="demo">
-				<h2>Demo: Accordion</h2>
-				<ul id="demo2" class="nav"></ul>
-				<strong>Javascript</strong>
-				<pre><code class="javascript">// Setup navgoco accordion menu
-$("#demo2").navgoco({accordion: true});</code></pre>
+
+			<section>
+				<ul class="tabs">
+					<li class="active"><a href="#">Accordion</a></li>
+					<li><a href="#">Javascript</a></li>
+					<li><a href="#">Html</a></li>
+				</ul>
+				<div class="panes">
+					<div id="demo2-html">
+						<ul id="demo2" class="nav"></ul>
+					</div>
+					<pre><code class="javascript" data-source="demo2"></code></pre>
+					<pre><code class="html" data-source="demo2"></code></pre>
+				</div>
 			</section>
 			<hr />
 		</div>

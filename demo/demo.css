@@ -667,7 +667,7 @@ div.wrapper {
 }
 
 section.description {
-	padding: 10px;
+	padding: 10px 10px 0 10px;
 }
 
 .center {
@@ -689,23 +689,19 @@ h1.logo a {
 	margin: 0 auto;
 }
 
-span.title {
+span.navgoco {
 	font-size: 22px;
 	font-weight: bold;
 	color: #7f8c8d;
 }
 
-span.title a:hover {
+span.navgoco a:hover {
 	color: #95a5a6;
 	text-decoration: none;
 }
 
-span.title a {
+span.navgoco a {
 	color: #7f8c8d;
-}
-
-section.demo {
-
 }
 
 footer.copyright {
@@ -719,7 +715,7 @@ p.external {
 }
 
 hr {
-    margin: 10px 0;
+    margin: 20px 0;
     border: 0;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #fff;
@@ -741,4 +737,43 @@ pre code {
     max-height: 450px;
     white-space: pre;
     overflow: auto;
+}
+
+
+/* Tabs */
+ul.tabs {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	border-bottom: 1px solid #ddd;
+}
+
+ul.tabs li {
+	display: inline-block;
+	line-height: 34px;
+}
+
+ul.tabs li a {
+	display: block;
+	line-height: 25px;
+	padding: 5px 10px;
+	text-decoration: none;
+	color: #95a5a6;
+	font-weight: bold;
+	margin-bottom: 0px;
+	-webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+
+ul.tabs li a:hover {
+	background-color: #bdc3c7;
+	color: #ecf0f1;
+}
+
+ul.tabs li.active a {
+	color: #2c3e50;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-bottom: none;
 }
