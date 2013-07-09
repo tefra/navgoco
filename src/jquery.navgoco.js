@@ -1,5 +1,5 @@
 /*
- * jQuery Navgoco Menus Plugin v0.1.2 (2013-07-09)
+ * jQuery Navgoco Menus Plugin v0.1.3 (2013-07-09)
  * https://github.com/tefra/navgoco
  *
  * Copyright (c) 2013 Chris T (@tefra)
@@ -61,17 +61,19 @@
 				links.append(self.options.caret);
 			}
 			links.on('click', function(e) {
+				e.stopPropagation();
 				e.preventDefault();
-				var sub = $(this).next();
-				var isOpen = sub.is(":visible");
+				var sub = $(this).next(),
+					isOpen = sub.is(":visible");
+
 				self._toggle(sub, !isOpen);
 				self._save();
 			});
 		},
 		/**
-		 * Accepts a JQuery Element and a boolean flag. If flag is false it removes from the
-		 * parent li  the `open` css class and slides up the sub-menu. If flag is open it adds to
-		 * the parent li the `open` css class and slides down the menu. If accordion mode is on all
+		 * Accepts a JQuery Element and a boolean flag. If flag is false it removes the `open` css
+		 * class from the parent li and slides up the sub-menu. If flag is open it adds the `open`
+		 * css class to the parent li and slides down the menu. If accordion mode is on all
 		 * sub-menus except the direct parent tree will close. Internally an object with the menus
 		 * states is maintained for later save duty.
 		 *
@@ -79,9 +81,10 @@
 		 * @param {Boolean} open
 		 */
 		_toggle: function(sub, open) {
-			var self = this;
-			var idx = sub.attr('data-index');
-			var parent = sub.parent();
+			var self = this,
+				idx = sub.attr('data-index'),
+				parent = sub.parent();
+
 			if (open) {
 				parent.addClass(self.options.openClass);
 				sub.slideDown(self.options.slide);
@@ -91,9 +94,10 @@
 					var allowed = self.state = self._parents(sub);
 					allowed[idx] = self.state[idx] = 1;
 
-					self.$el.find("ul:visible").each(function() {
-						var sub = $(this);
-						var idx = sub.attr('data-index');
+					self.$el.find('ul').filter(':visible').each(function() {
+						var sub = $(this),
+							idx = sub.attr('data-index');
+
 						if (!allowed.hasOwnProperty(idx)) {
 							self._toggle(sub, false);
 						}
@@ -104,8 +108,6 @@
 				sub.slideUp(self.options.slide);
 				self.state[idx] = 0;
 			}
-
-
 		},
 		/**
 		 * Returns all parents of a sub-menu. When obj is true It returns an object with indexes for
@@ -117,13 +119,14 @@
 		 * @returns {Object}
 		 */
 		_parents: function(sub, obj) {
-			var result = {};
-			var parent = sub.parent();
-			var parents = parent.parents('ul');
+			var result = {},
+				parent = sub.parent(),
+				parents = parent.parents('ul');
 
 			parents.each(function() {
-				var par = $(this);
-				var idx = $(this).attr('data-index');
+				var par = $(this),
+					idx = par.attr('data-index');
+
 				if (!idx) {
 					return false;
 				}
@@ -170,8 +173,8 @@
 		 * @param {Boolean} open
 		 */
 		toggle: function(open) {
-			var self = this;
-			var length = arguments.length;
+			var self = this,
+				length = arguments.length;
 
 			if (length <= 1) {
 				self.$el.find('ul').each(function() {
@@ -179,10 +182,10 @@
 					self._toggle(sub, open);
 				});
 			} else {
-				var idx;
-				var list = {};
-				var args = Array.prototype.slice.call(arguments, 1);
-				length -= 1;
+				var idx,
+					list = {},
+					args = Array.prototype.slice.call(arguments, 1);
+				length--;
 
 				for (var i = 0; i < length; i++) {
 					idx = args[i];
@@ -204,7 +207,6 @@
 					self._toggle(list[idx], open);
 				}
 			}
-
 			self._save();
 		},
 		/**
@@ -225,8 +227,8 @@
 	 */
 	$.fn.navgoco = function(options) {
 		if (typeof options === 'string' && options.charAt(0) !== '_' && options !== 'init') {
-			var callback = true;
-			var args = Array.prototype.slice.call(arguments, 1);
+			var callback = true,
+				args = Array.prototype.slice.call(arguments, 1);
 		} else {
 			options = $.extend({}, $.fn.navgoco.defaults, options || {});
 			if (!$.cookie) {
@@ -234,8 +236,8 @@
 			}
 		}
 		return this.each(function(idx) {
-			var $this = $(this);
-			var obj = $this.data('navgoco');
+			var $this = $(this),
+				obj = $this.data('navgoco');
 
 			if (!obj) {
 				obj = new Plugin(this, callback ? $.fn.navgoco.defaults : options, idx);

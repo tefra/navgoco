@@ -1,6 +1,8 @@
 (function($) {
-	var menu, first, li;
-	var html = arrayToUl(links);
+	var menu,
+		first,
+		li,
+		html = arrayToUl(links);
 
 	function getVisible() {
 		var result = [];
@@ -11,7 +13,6 @@
 	}
 
 	module('#navgoco', {
-		// This will run before each test in this module.
 		setup: function() {
 			menu = $('<ul>' + html + '</ul>');
 			menu.appendTo($('#qunit-fixture'));
@@ -24,7 +25,6 @@
 
 	test('chainability', function() {
 		strictEqual(menu.navgoco(), menu, 'should be chainable');
-
 	});
 
 	test('caret', function() {
