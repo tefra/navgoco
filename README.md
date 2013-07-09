@@ -23,26 +23,23 @@ Download the plugin, unzip it and copy the files to your application directory a
     </head>
 ```
 
-Sample menu html code:
-```html
-	<ul class="nav">
-		<li><a href="#">1. Menu</a>
-			<ul>
-				<li><a href="#">1.1 Submenu</a></li>
-				<li><a href="#">1.2 Submenu</a></li>
-				<li><a href="#">1.3 Submenu</a></li>
-			</ul>
-		</li>
-	<!-- etc... -->
-	</ul>
-```
-Activate the plugin like this:
+Sample menu html and activation code:
 ```html
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.nav').navgoco();
 	});
 </script>
+<ul class="nav">
+	<li><a href="#">1. Menu</a>
+		<ul>
+			<li><a href="#">1.1 Submenu</a></li>
+			<li><a href="#">1.2 Submenu</a></li>
+			<li><a href="#">1.3 Submenu</a></li>
+		</ul>
+	</li>
+<!-- etc... -->
+</ul>
 ```
 
 You can also extend the default options:
