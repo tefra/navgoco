@@ -2,9 +2,12 @@
 
 module.exports = function(grunt) {
 
+	grunt.util.linefeed = '\n';
+
 	// Project configuration.
 	grunt.initConfig({
 		// Metadata.
+
 		pkg: grunt.file.readJSON('navgoco.jquery.json'),
 		banner: '/*\n' +
 				' * jQuery <%= pkg.title || pkg.name %> Plugin v<%= pkg.version %> (<%= grunt.template.today("yyyy-mm-dd") %>)\n' +
