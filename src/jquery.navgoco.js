@@ -217,6 +217,36 @@
 	};
 
 	/**
+	 * A JQuery plugin wrapper for navgoco. It prevents from multiple instances and also handles
+	 * public methods calls. If we attempt to call a public method on an element that doesn't have
+	 * a navgoco instance, one will be created for it with the default options.
+	 *
+	 * @param {Object|String} options
+	 */
+	$.fn.navgoco = function(options) {
+		if (typeof options === 'string' && options.charAt(0) !== '_' && options !== 'init') {
+			var callback = true;
+			var args = Array.prototype.slice.call(arguments, 1);
+		} else {
+			options = $.extend({}, $.fn.navgoco.defaults, options || {});
+			if (!$.cookie) {
+				options.save = false;
+			}
+		}
+		return this.each(function(idx) {
+			var $this = $(this);
+			var obj = $this.data('navgoco');
+
+			if (!obj) {
+				obj = new Plugin(this, callback ? $.fn.navgoco.defaults : options, idx);
+				$this.data('navgoco', obj);
+			}
+			if (callback) {
+				obj[options].apply(obj, args);
+			}
+		});
+	};
+	/**
 	 * Global var holding all navgoco menus open states
 	 *
 	 * @type {Object}
@@ -228,7 +258,8 @@
 	 *
 	 * @type {Object}
 	 */
-	var defaults = {
+
+	$.fn.navgoco.defaults = {
 		caret: '<span class="caret"></span>',
 		accordion: false,
 		openClass: 'open',
@@ -242,36 +273,5 @@
 			duration: 400,
 			easing: 'swing'
 		}
-	};
-
-	/**
-	 * A JQuery plugin wrapper for navgoco. It prevents from multiple instances and also handles
-	 * public methods calls. If we attempt to call a public method on an element that doesn't have
-	 * a navgoco instance, one will be created for it with the default options.
-	 *
-	 * @param {Object|String} options
-	 */
-	$.fn.navgoco = function(options) {
-		if (typeof options === 'string' && options.charAt(0) !== '_' && options !== 'init') {
-			var callback = true;
-			var args = Array.prototype.slice.call(arguments, 1);
-		} else {
-			options = $.extend({}, defaults, options || {});
-			if (!$.cookie) {
-				options.save = false;
-			}
-		}
-		return this.each(function(idx) {
-			var $this = $(this);
-			var obj = $this.data('navgoco');
-
-			if (!obj) {
-				obj = new Plugin(this, callback ? defaults : options, idx);
-				$this.data('navgoco', obj);
-			}
-			if (callback) {
-				obj[options].apply(obj, args);
-			}
-		});
 	};
 })(jQuery);
