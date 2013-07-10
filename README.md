@@ -12,15 +12,15 @@ menu. **[Demo](http://apps.komposta.net/jquery/navgoco/demo)**
 Download the plugin, unzip it and copy the files to your application directory and load them inside your HTML.
 
 ```html
-    <head>
-		<!-- Load JQuery -->
-        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-		<!-- Load jquery.cookie plugin (optional) -->
-		<script type="text/javascript" src="/navgoco/src/jquery.cookie.js"></script>
-		<!-- Load jquery.navgoco plugin js and css files -->
-		<script type="text/javascript" src="/navgoco/src/jquery.navgoco.js"></script>
-        <link rel="stylesheet" href="/navgoco/src/jquery.navgoco.css" type="text/css" media="screen" />
-    </head>
+<head>
+	<!-- Load JQuery -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<!-- Load jquery.cookie plugin (optional) -->
+	<script type="text/javascript" src="/navgoco/src/jquery.cookie.js"></script>
+	<!-- Load jquery.navgoco plugin js and css files -->
+	<script type="text/javascript" src="/navgoco/src/jquery.navgoco.js"></script>
+	<link rel="stylesheet" href="/navgoco/src/jquery.navgoco.css" type="text/css" media="screen" />
+</head>
 ```
 
 Sample menu html and activation code:
