@@ -5,7 +5,7 @@ $(document).ready(function() {
 	$('#demo1 li').first().addClass('active');
 	$("#demo2").append(demoMenu);
 	$('#demo2 li').first().addClass('active');
-	hljs.tabReplace = '    ';
+
 
 	$('pre > code').each(function() {
 		var that = $(this),
@@ -25,5 +25,6 @@ $(document).ready(function() {
 		$(this).children().hide().eq(0).show();
 
 	});
+	hljs.tabReplace = '    ';
 	hljs.initHighlightingOnLoad();
 });
