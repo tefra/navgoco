@@ -1,13 +1,8 @@
 'use strict';
 
 module.exports = function(grunt) {
-
 	grunt.util.linefeed = '\n';
-
-	// Project configuration.
 	grunt.initConfig({
-		// Metadata.
-
 		pkg: grunt.file.readJSON('navgoco.jquery.json'),
 		banner: '/*\n' +
 				' * jQuery <%= pkg.title || pkg.name %> Plugin v<%= pkg.version %> (<%= grunt.template.today("yyyy-mm-dd") %>)\n' +
@@ -100,7 +95,6 @@ module.exports = function(grunt) {
 		},
 	});
 
-	// These plugins provide necessary tasks.
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -109,8 +103,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 
-	// Register tasks.
 	grunt.registerTask('default', ['connect', 'clean', 'jshint', 'concat', 'uglify', 'qunit']);
 	grunt.registerTask('test', ['connect', 'jshint', 'qunit']);
-
 };
