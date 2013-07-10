@@ -260,7 +260,6 @@
 	 *
 	 * @type {Object}
 	 */
-
 	$.fn.navgoco.defaults = {
 		caret: '<span class="caret"></span>',
 		accordion: false,
