@@ -2,10 +2,10 @@
 
 **v0.1.3** (July 11, 2013)
 
-* Added event propagation
+* Small changes to improve performance and usability
 * Updated default settings to be accessible `$.fn.navgoco.defaults.save = false;`
+* Updated documentation and demo
 * Updated tests
-* Updated documentation and demo.
 
 **v0.1.2** (July 9, 2013)
 
