@@ -1,7 +1,7 @@
-![alt text](https://github.com/tefra/navgoco/raw/master/demo/navgoco.jpg "{:navgoco}")
+[![{:navgoco}](https://github.com/tefra/navgoco/raw/master/demo/navgoco.jpg)](http://www.komposta.net/article/navgoco)
 
 
-# {:navgoco}
+# {:navgoco} [![Build Status](https://travis-ci.org/tefra/navgoco.png?branch=master)](https://travis-ci.org/tefra/navgoco)
 
 Navgoco is a simple JQuery plugin which turns a nested unordered list of links
 into a beautiful vertical multi-level slide navigation, with ability to preserve
