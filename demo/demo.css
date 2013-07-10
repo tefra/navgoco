@@ -775,5 +775,6 @@ ul.tabs li.active a {
 	color: #2c3e50;
 	background-color: #fff;
 	border: 1px solid #ddd;
-	border-bottom: none;
+	border-bottom-color: #fff;
+	margin-bottom: -1px;
 }
