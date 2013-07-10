@@ -1,5 +1,12 @@
 ## Changelog
 
+**v0.1.3** (July 11, 2013)
+
+* Added event propagation
+* Updated default settings to be accessible `$.fn.navgoco.defaults.save = false;`
+* Updated tests
+* Updated documentation and demo.
+
 **v0.1.2** (July 9, 2013)
 
 * Updated toggle procedure to open parent sub-menus
