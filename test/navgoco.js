@@ -66,7 +66,7 @@
 		deepEqual(getVisible(), ['0', '1', '2', '3', '4'], 'All sub-menus should be visible');
 	});
 
-	test('accordion', function() {
+	test('accordion #1', function() {
 		expect(1);
 		menu.navgoco({accordion: true});
 		menu.navgoco('toggle', true, 0);
@@ -75,6 +75,44 @@
 		stop();
 		setTimeout(function() {
 			deepEqual(getVisible(), ['0'], 'Only submenus 0 should be visible');
+			start();
+		}, 1000);
+	});
+
+	test('accordion #2', function() {
+		expect(1);
+		menu.navgoco({accordion: true});
+		menu.navgoco('toggle', true, 0);
+		var link = menu.find("li:not(:has(ul)) > a").first();
+		link.click();
+		stop();
+		setTimeout(function() {
+			deepEqual(getVisible(), [], 'No submenus should be visible');
+			start();
+		}, 1000);
+	});
+
+	test('accordion #3', function() {
+		expect(1);
+		menu.navgoco({accordion: true});
+		$("a:contains('About')").click();
+		$("a:contains('Contact Us')").click();
+		$("a:contains('Support and Service')").click();
+		stop();
+		setTimeout(function() {
+			deepEqual(getVisible(), ['1', '2'], 'Submenus 1 & 2 should be visible');
+			start();
+		}, 1000);
+	});
+
+	test('accordion #4', function() {
+		expect(1);
+		menu.navgoco({accordion: true});
+		menu.navgoco('toggle', true, 2);
+		$("a:contains('Environment')").click();
+		stop();
+		setTimeout(function() {
+			deepEqual(getVisible(), ['1'], 'Only Submenu 1 should be visible');
 			start();
 		}, 1000);
 	});
