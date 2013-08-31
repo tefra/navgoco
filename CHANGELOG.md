@@ -1,5 +1,10 @@
 ## Changelog
 
+**v0.1.4** (September 1, 2013)
+ * Improve accordion mode to close sub-menus when clicking menu links without children.
+ * Updated readme to correct a false statement.
+ * Updated qunit tests, fixtures & demo.
+
 **v0.1.3** (July 11, 2013)
 
 * Small changes to improve performance and usability

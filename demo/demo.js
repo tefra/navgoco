@@ -6,6 +6,10 @@ $(document).ready(function() {
 	$("#demo2").append(demoMenu);
 	$('#demo2 li').first().addClass('active');
 
+	$('#demo1, #demo2').find("li:not(:has(ul)) > a").click(function(e) {
+		e.preventDefault();
+		alert('Menu `'+ $(this).text() +'` was clicked');
+	});
 
 	$('pre > code').each(function() {
 		var that = $(this),
