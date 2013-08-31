@@ -148,7 +148,7 @@ $(selector).navgoco('toggle', true|false);
 
 ```js
 // Show|Hide sub-menus with specific indexes
-// Make sure you include all parents, it won't do that for you
+// It will also open parent sub-menus since v0.1.2
 $(selector).navgoco('toggle', true|false, 1, 2, ...);
 ```
 

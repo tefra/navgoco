@@ -32,6 +32,7 @@ function arrayToUl(data, depth) {
 }
 
 var links = {
+	"0": "Home",
 	"News and Events": [
 		"Hot News",
 		"RSS Feeds",
