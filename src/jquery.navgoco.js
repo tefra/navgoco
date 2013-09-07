@@ -1,5 +1,5 @@
 /*
- * jQuery Navgoco Menus Plugin v0.1.4 (2013-09-07)
+ * jQuery Navgoco Menus Plugin v0.1.5 (2013-09-07)
  * https://github.com/tefra/navgoco
  *
  * Copyright (c) 2013 Chris T (@tefra)
@@ -56,20 +56,19 @@
 				}
 			});
 
-			var parents = self.$el.find("li:has(ul) > a");
 			if (self.options.caret) {
-				parents.append(self.options.caret);
+				self.$el.find("li:has(ul) > a").append(self.options.caret);
 			}
 
 			var links = self.$el.find("li > a");
-			links.on('click', function(e) {
-				e.stopPropagation();
+			links.on('click', function(event) {
+				event.stopPropagation();
 				var sub = $(this).next();
-
-				if (sub.length > 0) {
-					e.preventDefault();
-					var isOpen = sub.is(":visible");
-					self._toggle(sub, !isOpen);
+				sub = sub.length > 0 ? sub : false;
+				self.options.onClickBefore.call(this, event, sub);
+				if (sub) {
+					event.preventDefault();
+					self._toggle(sub, sub.is(":hidden"));
 					self._save();
 				} else {
 					if (self.options.accordion) {
@@ -85,6 +84,7 @@
 						self._save();
 					}
 				}
+				self.options.onClickAfter.call(this, event, sub);
 			});
 		},
 		/**
@@ -102,6 +102,7 @@
 				idx = sub.attr('data-index'),
 				parent = sub.parent();
 
+			self.options.onToggleBefore.call(this, sub, open);
 			if (open) {
 				parent.addClass(self.options.openClass);
 				sub.slideDown(self.options.slide);
@@ -125,6 +126,7 @@
 				sub.slideUp(self.options.slide);
 				self.state[idx] = 0;
 			}
+			self.options.onToggleAfter.call(this, sub, open);
 		},
 		/**
 		 * Returns all parents of a sub-menu. When obj is true It returns an object with indexes for
@@ -291,9 +293,9 @@
 			duration: 400,
 			easing: 'swing'
 		},
-		onBrachClickBefore: $.noop,
-		onBrachClickAfter: $.noop,
-		onLeafClickBefore: $.noop,
-		onLeafClickAfter: $.noop
+		onClickBefore: $.noop,
+		onClickAfter: $.noop,
+		onToggleBefore: $.noop,
+		onToggleAfter: $.noop
 	};
 })(jQuery);
