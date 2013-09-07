@@ -1,5 +1,5 @@
 /*
- * jQuery Navgoco Menus Plugin v0.1.4 (2013-09-01)
+ * jQuery Navgoco Menus Plugin v0.1.4 (2013-09-07)
  * https://github.com/tefra/navgoco
  *
  * Copyright (c) 2013 Chris T (@tefra)
@@ -60,31 +60,32 @@
 			if (self.options.caret) {
 				parents.append(self.options.caret);
 			}
-			parents.on('click', function(e) {
+
+			var links = self.$el.find("li > a");
+			links.on('click', function(e) {
 				e.stopPropagation();
-				e.preventDefault();
-				var sub = $(this).next(),
-					isOpen = sub.is(":visible");
-				self._toggle(sub, !isOpen);
-				self._save();
-			});
+				var sub = $(this).next();
 
-			if (self.options.accordion) {
-				var childrent = self.$el.find("li:not(:has(ul)) > a");
-				childrent.on('click', function(e) {
-					e.stopPropagation();
-					var allowed = self.state = self._parents($(this));
-					self.$el.find('ul').filter(':visible').each(function() {
-						var sub = $(this),
-							idx = sub.attr('data-index');
-
-						if (!allowed.hasOwnProperty(idx)) {
-							self._toggle(sub, false);
-						}
-					});
+				if (sub.length > 0) {
+					e.preventDefault();
+					var isOpen = sub.is(":visible");
+					self._toggle(sub, !isOpen);
 					self._save();
-				});
-			}
+				} else {
+					if (self.options.accordion) {
+						var allowed = self.state = self._parents($(this));
+						self.$el.find('ul').filter(':visible').each(function() {
+							var sub = $(this),
+								idx = sub.attr('data-index');
+
+							if (!allowed.hasOwnProperty(idx)) {
+								self._toggle(sub, false);
+							}
+						});
+						self._save();
+					}
+				}
+			});
 		},
 		/**
 		 * Accepts a JQuery Element and a boolean flag. If flag is false it removes the `open` css
@@ -289,6 +290,10 @@
 		slide: {
 			duration: 400,
 			easing: 'swing'
-		}
+		},
+		onBrachClickBefore: $.noop,
+		onBrachClickAfter: $.noop,
+		onLeafClickBefore: $.noop,
+		onLeafClickAfter: $.noop
 	};
 })(jQuery);
