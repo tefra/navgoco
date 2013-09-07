@@ -1,5 +1,9 @@
 ## Changelog
 
+**v0.1.5** (September 7, 2013)
+ * Added callback methods: onClickBefore, onClickAfter, onToggleBefore, onToggleAfter
+ * Updated readme & demo.
+
 **v0.1.4** (September 1, 2013)
  * Improve accordion mode to close sub-menus when clicking menu links without children.
  * Updated readme to correct a false statement.
