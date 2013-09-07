@@ -116,7 +116,6 @@ Preserve expanded sub-menus between session. If jquery.cookie is not included it
       * *Type:* `string`
       * *Default:* `/`
 
-
 ----------
 
 #### slide:
@@ -128,6 +127,38 @@ Preserve expanded sub-menus between session. If jquery.cookie is not included it
       * *Type:* `string`
       * *Default:* `swing`
 
+
+## Callbacks
+With the options you can also pass callback functions to extend the plugin's functionality.
+
+#### onClickBefore:
+This callback is executed before the plugin's main procedure when clicking links.
+ * **Parameters**
+   * `Event`: `Event Object`
+   * `Submenu`: False if the clicked link is a leaf or the next `sub-menu` if link is a branch.
+
+----------
+
+#### onClickAfter:
+This callback is executed after the plugin's main procedure when clicking links.
+ * **Parameters**
+   * `Event`: `Event Object`
+   * `Submenu`: `False` if the clicked link is a leaf or the next `sub-menu` if link is a branch.
+
+----------
+
+#### onToggleBefore:
+This callback is executed before the plugin's main procedure when toggling sub-menus.
+ * **Parameters**
+   * `Submenu`: `JQuery Object`
+   * `Opening`: `True|False` the submenu is opening or closing
+
+----------
+
+This callback is executed after the plugin's main procedure when toggling sub-menus.
+ * **Parameters**
+   * *Submenu:* `JQuery Object`
+   * *Opened:* `True|False` the submenu opened or closed
 
 ## Public Methods
 

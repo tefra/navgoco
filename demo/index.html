@@ -51,6 +51,35 @@ $(document).ready(function() {
 	$("#demo2").navgoco({accordion: true});
 });
 </script>
+
+<script type="text/javascript" id="demo3-javascript">
+$(document).ready(function() {
+	$("#demo3").navgoco({
+		accordion: true,
+		onClickBefore: function(e, submenu) {
+			alert('Clicked on '+ (submenu === false ? 'leaf' : 'branch') + ' `'+$(this).text()+'`');
+		},
+		onClickAfter: function(e, submenu) {
+			e.preventDefault();
+			$('#demo3').find('li').removeClass('active');
+				var li =  $(this).parent();
+				var lis = li.parents('li');
+				li.addClass('active');
+				lis.addClass('active');
+		},
+		onToggleBefore: function(submenu, opening) {
+			var idx = submenu.attr('data-index');
+			var message = opening ? 'opening' : 'closing';
+			console.log('I am ' + message + ' menu ' + idx + ' just after this.');
+		},
+		onToggleAfter: function(submenu, opened) {
+			var idx = submenu.attr('data-index');
+			var message = opened ? 'opened' : 'closed';
+			console.log('I ' + message + ' menu ' + idx + ' just before this.');
+		}
+	});
+});
+</script>
 	</head>
 	<body>
 		<a href="https://github.com/tefra/navgoco/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
@@ -81,7 +110,7 @@ $(document).ready(function() {
 						<a href="https://github.com/tefra/navgoco">GitHub</a> |
 						<a href="http://plugins.jquery.com/navgoco/">JQuery</a> |
 						<a href="https://github.com/tefra/navgoco/blob/master/README.md">ReadMe</a> |
-						<a href="https://github.com/tefra/navgoco/blob/master/CHANGELOG.md">Changelog v0.1.4</a>
+						<a href="https://github.com/tefra/navgoco/blob/master/CHANGELOG.md">Changelog v0.1.5</a>
 					</strong>
 				</p>
 			</section>
@@ -116,6 +145,21 @@ $(document).ready(function() {
 					</div>
 					<pre><code class="javascript" data-source="demo2"></code></pre>
 					<pre><code class="html" data-source="demo2"></code></pre>
+				</div>
+			</section>
+			<hr />
+			<section>
+				<ul class="tabs">
+					<li class="active"><a href="#">Callbacks</a></li>
+					<li><a href="#">Javascript</a></li>
+					<li><a href="#">Html</a></li>
+				</ul>
+				<div class="panes">
+					<div id="demo3-html">
+						<ul id="demo3" class="nav"></ul>
+					</div>
+					<pre><code class="javascript" data-source="demo3"></code></pre>
+					<pre><code class="html" data-source="demo3"></code></pre>
 				</div>
 			</section>
 			<hr />

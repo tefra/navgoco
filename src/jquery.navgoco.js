@@ -1,5 +1,5 @@
 /*
- * jQuery Navgoco Menus Plugin v0.1.4 (2013-09-01)
+ * jQuery Navgoco Menus Plugin v0.1.5 (2013-09-07)
  * https://github.com/tefra/navgoco
  *
  * Copyright (c) 2013 Chris T (@tefra)
@@ -56,35 +56,36 @@
 				}
 			});
 
-			var parents = self.$el.find("li:has(ul) > a");
 			if (self.options.caret) {
-				parents.append(self.options.caret);
+				self.$el.find("li:has(ul) > a").append(self.options.caret);
 			}
-			parents.on('click', function(e) {
-				e.stopPropagation();
-				e.preventDefault();
-				var sub = $(this).next(),
-					isOpen = sub.is(":visible");
-				self._toggle(sub, !isOpen);
-				self._save();
-			});
 
-			if (self.options.accordion) {
-				var childrent = self.$el.find("li:not(:has(ul)) > a");
-				childrent.on('click', function(e) {
-					e.stopPropagation();
-					var allowed = self.state = self._parents($(this));
-					self.$el.find('ul').filter(':visible').each(function() {
-						var sub = $(this),
-							idx = sub.attr('data-index');
-
-						if (!allowed.hasOwnProperty(idx)) {
-							self._toggle(sub, false);
-						}
-					});
+			var links = self.$el.find("li > a");
+			links.on('click', function(event) {
+				event.stopPropagation();
+				var sub = $(this).next();
+				sub = sub.length > 0 ? sub : false;
+				self.options.onClickBefore.call(this, event, sub);
+				if (sub) {
+					event.preventDefault();
+					self._toggle(sub, sub.is(":hidden"));
 					self._save();
-				});
-			}
+				} else {
+					if (self.options.accordion) {
+						var allowed = self.state = self._parents($(this));
+						self.$el.find('ul').filter(':visible').each(function() {
+							var sub = $(this),
+								idx = sub.attr('data-index');
+
+							if (!allowed.hasOwnProperty(idx)) {
+								self._toggle(sub, false);
+							}
+						});
+						self._save();
+					}
+				}
+				self.options.onClickAfter.call(this, event, sub);
+			});
 		},
 		/**
 		 * Accepts a JQuery Element and a boolean flag. If flag is false it removes the `open` css
@@ -101,6 +102,7 @@
 				idx = sub.attr('data-index'),
 				parent = sub.parent();
 
+			self.options.onToggleBefore.call(this, sub, open);
 			if (open) {
 				parent.addClass(self.options.openClass);
 				sub.slideDown(self.options.slide);
@@ -124,6 +126,7 @@
 				sub.slideUp(self.options.slide);
 				self.state[idx] = 0;
 			}
+			self.options.onToggleAfter.call(this, sub, open);
 		},
 		/**
 		 * Returns all parents of a sub-menu. When obj is true It returns an object with indexes for
@@ -289,6 +292,10 @@
 		slide: {
 			duration: 400,
 			easing: 'swing'
-		}
+		},
+		onClickBefore: $.noop,
+		onClickAfter: $.noop,
+		onToggleBefore: $.noop,
+		onToggleAfter: $.noop
 	};
 })(jQuery);

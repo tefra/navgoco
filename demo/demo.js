@@ -5,10 +5,11 @@ $(document).ready(function() {
 	$('#demo1 li').first().addClass('active');
 	$("#demo2").append(demoMenu);
 	$('#demo2 li').first().addClass('active');
+	$("#demo3").append(demoMenu);
+	$('#demo3 li').first().addClass('active');
 
-	$('#demo1, #demo2').find("li:not(:has(ul)) > a").click(function(e) {
+	$('#demo1, #demo2, #demo3').find("li > a").click(function(e) {
 		e.preventDefault();
-		alert('Menu `'+ $(this).text() +'` was clicked');
 	});
 
 	$('pre > code').each(function() {
