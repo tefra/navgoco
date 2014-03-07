@@ -10,8 +10,8 @@
 		<script src="fixture.js"></script>
 		<script src="demo.js"></script>
 
-		<!-- Add JQuery cookie plugin (optional) -->
-		<script src="../src/jquery.cookie.js"></script>
+		<!-- Add JQuery cookie plugin (optional) >
+		<script src="../src/jquery.cookie.js"></script-->
 		<!-- Add navgoco main js and css files  -->
 		<script type="text/javascript" src="../src/jquery.navgoco.js"></script>
 		<link rel="stylesheet" type="text/css" href="../src/jquery.navgoco.css" media="screen" />
@@ -24,10 +24,8 @@ $(document).ready(function() {
 		accordion: false,
 		openClass: 'open',
 		save: true,
-		cookie: {
-			name: 'navgoco',
-			expires: false,
-			path: '/'
+		storage: {
+			name: 'navgoco'
 		},
 		slide: {
 			duration: 400,
