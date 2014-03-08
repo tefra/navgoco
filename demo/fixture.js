@@ -10,7 +10,7 @@ function repeat(pattern, count) {
 	return result;
 }
 
-function arrayToUl(data, depth) {
+function arrayToUl(data, depth, proper) {
 	depth = (isNaN(depth) || depth == 0) ? 1 : depth;
 	var html = '',
 		il = repeat('\t', depth),
@@ -20,10 +20,12 @@ function arrayToUl(data, depth) {
 		html += il + '<li>';
 		var isInt = (parseInt(key) == key);
 		var label = isInt ? data[key] : key;
-		html += '<a href="#">' + label + '</a>';
+		var href = proper ? hrefs[Math.floor(Math.random() * hrefs.length)] : '#';
+		label = href === '#' ? label : 'Google'
+		html += '<a href="' + href + '">' + label + '</a>';
 		if (!isInt) {
 			html += '\n' + iu + '<ul>\n';
-			html += arrayToUl(data[key], depth + 2);
+			html += arrayToUl(data[key], depth + 2, proper);
 			html += iu + '</ul>\n' + il;
 		}
 		html += '</li>\n';
@@ -64,3 +66,8 @@ var links = {
 		"Peach Financial Services", "Peach Rebates"
 	]
 };
+
+var hrefs = [
+	'http://www.google.com',
+	'#'
+];

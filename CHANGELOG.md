@@ -1,5 +1,14 @@
 ## Changelog
 
+**v0.2.0** (March 9, 2014)
+ * Added ability to have parent links with proper links
+  * Parent links with `href` equal to `''` or `#` toggle submenus as they used to.
+  * To toggle parent links with normal `href` you now have to click the caret/arrow
+ * Added option `caretHtml` to insert custom html in the caret markup.
+  * `caret` option was removed to since it's not optional anymore. Default caret markup: `<span></span>`
+ * Updated demo css to opt for css content attribute instead of borders to create the arrow effects.
+ * Updated documentation.
+
 **v0.1.5** (September 7, 2013)
  * Added callback methods: onClickBefore, onClickAfter, onToggleBefore, onToggleAfter
  * Updated readme & demo.

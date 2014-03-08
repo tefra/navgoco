@@ -20,7 +20,7 @@
 $(document).ready(function() {
 	// Initialize navgoco with default options
 	$("#demo1").navgoco({
-		caret: '<span class="caret"></span>',
+		caretHtml: '',
 		accordion: false,
 		openClass: 'open',
 		save: true,
@@ -57,7 +57,9 @@ $(document).ready(function() {
 	$("#demo3").navgoco({
 		accordion: true,
 		onClickBefore: function(e, submenu) {
-			alert('Clicked on '+ (submenu === false ? 'leaf' : 'branch') + ' `'+$(this).text()+'`');
+                        var title = $(this).text();
+                        var isCaret = title === '';
+			alert('Clicked on '+ (isCaret ? 'a caret/arrow' : ' the branch ' + '`' + title + '`'));
 		},
 		onClickAfter: function(e, submenu) {
 			e.preventDefault();
@@ -110,8 +112,12 @@ $(document).ready(function() {
 						<a href="https://github.com/tefra/navgoco">GitHub</a> |
 						<a href="http://plugins.jquery.com/navgoco/">JQuery</a> |
 						<a href="https://github.com/tefra/navgoco/blob/master/README.md">ReadMe</a> |
-						<a href="https://github.com/tefra/navgoco/blob/master/CHANGELOG.md">Changelog v0.1.5</a>
+						<a href="https://github.com/tefra/navgoco/blob/master/CHANGELOG.md">Changelog v0.2.0</a>
 					</strong>
+				</p>
+				<p class="desc">
+					- You can also click the caret/arrow on the right to toggle submenus!<br />
+					- Parent menu items can be proper clickable links! (*since v0.2.0)<br />
 				</p>
 			</section>
 			<hr />

@@ -680,6 +680,11 @@ h1.logo {
 	margin: 0;
 }
 
+.desc {
+    font-size: 90%;
+    color: #7f8c8d;
+}
+
 h1.logo a {
 	width: 775px;
 	height: 225px;

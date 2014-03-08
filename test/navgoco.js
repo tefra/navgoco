@@ -31,7 +31,7 @@
 		expect(1);
 		menu.navgoco();
 		var link = menu.find("li:has(ul) > a").last();
-		strictEqual(link.html(), 'Where to Buy<span class="caret"></span>', 'caret should be present');
+		strictEqual(link.html(), '<span></span>Where to Buy', 'caret should be present');
 	});
 
 	test('mouse click', function() {
@@ -83,7 +83,7 @@
 		expect(1);
 		menu.navgoco({accordion: true});
 		menu.navgoco('toggle', true, 0);
-		var link = menu.find("li:not(:has(ul)) > a").first();
+		var link = menu.find("li:has(ul) > a").first();
 		link.click();
 		stop();
 		setTimeout(function() {

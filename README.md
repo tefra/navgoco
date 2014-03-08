@@ -49,7 +49,7 @@ You can also extend the default options:
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.nav').navgoco({
-			  caret: '<span class="caret"></span>',
+			  caretHtml: '<i class="some-random-icon-class"></i>',
 			  accordion: false,
 			  openClass: 'open',
 			  save: true,
@@ -73,12 +73,12 @@ You can pass these options as key/value object during activation to alter the de
 
 ----------
 
-#### caret
+#### caretHtml
   * **Type:** `string`
-  * **Default:** `<span class="caret"></span>`
+  * **Default:** ``
 
-Raw html appended into parent links:
-`<a href="#link">Item<span class="carent"></span></a>`
+Raw html to inserted in the caret markup of the parent links:
+`<a href="#link">Item<span>{:caretHtml}</span></a>`
 
 #### accordion
   * **Type:** `boolean`
@@ -155,6 +155,7 @@ This callback is executed before the plugin's main procedure when toggling sub-m
 
 ----------
 
+#### onToggleAfter:
 This callback is executed after the plugin's main procedure when toggling sub-menus.
  * **Parameters**
    * *Submenu:* `JQuery Object`
