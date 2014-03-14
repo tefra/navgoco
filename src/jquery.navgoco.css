@@ -32,11 +32,15 @@
 
 .nav li > a > span {
     float: right;
-    padding: 0 4px;
+    font-size: 19px;
+    font-weight: bolder;
+}
+
+.nav li > a:hover > span {
+    color: #fff;
 }
 
 .nav li > a > span:after {
-    font-size: 19px;
     content: '\25be';
 }
 .nav li.open > a > span:after {
