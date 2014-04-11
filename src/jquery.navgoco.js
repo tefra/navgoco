@@ -1,5 +1,5 @@
 /*
- * jQuery Navgoco Menus Plugin v0.2.0 (2014-03-15)
+ * jQuery Navgoco Menus Plugin v0.2.1 (2014-04-11)
  * https://github.com/tefra/navgoco
  *
  * Copyright (c) 2014 Chris T (@tefra)
@@ -57,15 +57,10 @@
 			});
 
 			var caret = $('<span></span>').prepend(self.options.caretHtml);
-			var parentLinks = self.$el.find("li:has(ul) > a");
-			var anchoredParentLinks = parentLinks.filter(function() {
-				var href = $(this).attr('href');
-				return  href === undefined || href === '' || href === '#';
-			});
-
+			var links = self.$el.find("li > a");
 			self._trigger(caret, false);
-			self._trigger(anchoredParentLinks, true);
-			parentLinks.prepend(caret);
+			self._trigger(links, true);
+			self.$el.find("li:has(ul) > a").prepend(caret);
 		},
 		/**
 		 * Add the main event trigger to toggle menu items to the given sources
@@ -77,25 +72,29 @@
 			sources.on('click', function(event) {
 				event.stopPropagation();
 				var sub = isLink ? $(this).next() : $(this).parent().next();
+				var isAnchor = false;
+				if (isLink) {
+					var href = $(this).attr('href');
+					isAnchor = href === undefined || href === '' || href === '#';
+				}
 				sub = sub.length > 0 ? sub : false;
 				self.options.onClickBefore.call(this, event, sub);
-				if (sub) {
+
+				if (!isLink || sub && isAnchor) {
 					event.preventDefault();
 					self._toggle(sub, sub.is(":hidden"));
 					self._save();
-				} else {
-					if (self.options.accordion) {
-						var allowed = self.state = self._parents($(this));
-						self.$el.find('ul').filter(':visible').each(function() {
-							var sub = $(this),
-								idx = sub.attr('data-index');
+				} else if (self.options.accordion) {
+					var allowed = self.state = self._parents($(this));
+					self.$el.find('ul').filter(':visible').each(function() {
+						var sub = $(this),
+							idx = sub.attr('data-index');
 
-							if (!allowed.hasOwnProperty(idx)) {
-								self._toggle(sub, false);
-							}
-						});
-						self._save();
-					}
+						if (!allowed.hasOwnProperty(idx)) {
+							self._toggle(sub, false);
+						}
+					});
+					self._save();
 				}
 				self.options.onClickAfter.call(this, event, sub);
 			});

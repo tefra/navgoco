@@ -1,5 +1,10 @@
 ## Changelog
 
+**v0.2.1** (April 11, 2014)
+ * Fixed issue #13
+ * Fixed issue #12
+ * Updated documentation and demo
+
 **v0.2.0** (March 9, 2014)
  * Added ability to have parent links with proper links
   * Parent links with `href` equal to `''` or `#` toggle submenus as they used to.
