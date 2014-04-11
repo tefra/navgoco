@@ -1,26 +1,25 @@
 $(document).ready(function() {
-	// Create menus on the fly from fixtures
-	var demoMenu = '\n' + arrayToUl(links, 0, true);
-	$("#demo1").append(demoMenu);
-	$('#demo1 li').first().addClass('active');
-	$("#demo2").append(demoMenu);
-	$('#demo2 li').first().addClass('active');
-	$("#demo3").append(demoMenu);
-	$('#demo3 li').first().addClass('active');
+	function consoleWrite(message) {
+		$('#console').focus().append(message + '\n');
+	}
 
-	$('#demo1, #demo2, #demo3').find("li > a").click(function(e) {
+	$('#demo2').html($('#demo1').html());
+	$('#demo1 li').first().addClass('active');
+	$('#demo2 li').first().addClass('active');
+
+	$('#demo1, #demo2').find("li > a").click(function(e) {
 		e.preventDefault();
 		var isLink = $(this).is("a");
 		var href = isLink ? $(this).attr('href') : '';
 
 		if (isLink && href !== '#') {
-			alert('I would go to `' + href + '` but i don\t want too :p');
+			consoleWrite('Click my caret to open my submenu');
 		} else if (isLink) {
-			alert('I will just toggle my submenu i am just a dummy link');
-		} else {
-			alert('I will toggle my submenu after all i am a caret/arrow');
+			consoleWrite('Dummy link');
 		}
 	});
+
+	consoleWrite('navgoco console waiting for input...');
 
 	$('pre > code').each(function() {
 		var that = $(this),
