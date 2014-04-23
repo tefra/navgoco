@@ -33,14 +33,7 @@ $(document).ready(function() {
 			easing: 'swing'
 		},
 		// Add Active class to clicked menu item
-		onClickAfter: function(e, submenu) {
-			e.preventDefault();
-			$('#demo1').find('li').removeClass('active');
-			var li =  $(this).parent();
-			var lis = li.parents('li');
-			li.addClass('active');
-			lis.addClass('active');
-		},
+		onClickAfter: active_menu_cb,
 	});
 
 	$("#collapseAll").click(function(e) {
