@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	var disableCallbacks = location.href.match(/(\?|&)nocallbacks($|&|=)/);
+
 	function consoleWrite(message) {
 		$('#console').focus().append(message + '\n');
 	}
@@ -7,17 +9,30 @@ $(document).ready(function() {
 	$('#demo1 li').first().addClass('active');
 	$('#demo2 li').first().addClass('active');
 
-	$('#demo1, #demo2').find("li > a").click(function(e) {
-		e.preventDefault();
-		var isLink = $(this).is("a");
-		var href = isLink ? $(this).attr('href') : '';
+	if (!disableCallbacks) {
+		active_menu_cb = function(e, submenu) {
+			e.preventDefault();
+			$('#demo1').find('li').removeClass('active');
+			var li =  $(this).parent();
+			var lis = li.parents('li');
+			li.addClass('active');
+			lis.addClass('active');
+		};
 
-		if (isLink && href !== '#') {
-			consoleWrite('Click my caret to open my submenu');
-		} else if (isLink) {
-			consoleWrite('Dummy link');
-		}
-	});
+		$('#demo1, #demo2').find("li > a").click(function(e) {
+			e.preventDefault();
+			var isLink = $(this).is("a");
+			var href = isLink ? $(this).attr('href') : '';
+
+			if (isLink && href !== '#') {
+				consoleWrite('Click my caret to open my submenu');
+			} else if (isLink) {
+				consoleWrite('Dummy link');
+			}
+		});
+	} else {
+		active_menu_cb = $.noop;
+	}
 
 	consoleWrite('navgoco console waiting for input...');
 
