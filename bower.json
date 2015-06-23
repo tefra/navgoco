@@ -1,0 +1,38 @@
+{
+  "name": "navgoco",
+  "version": "0.2.1",
+  "authors": [
+    "Chris T (@tefra)"
+  ],
+  "description": "jQuery Navgoco Menus Plugin Bower Package",
+  "keywords": [
+    "Multi-level",
+    "slide",
+    "navigation",
+    "session",
+    "storage",
+    "accordion",
+    "effect",
+    "jQuery"
+  ],
+    "main": [
+        "src/jquery.navgoco.js",
+        "src/jquery.navgoco.css"
+    ],
+  "license": "BSD",
+  "homepage": "https://github.com/tefra/navgoco",
+  "ignore": [
+    ".jshintrc",
+    "test",
+    "build",
+    "components",
+    "node_modules",
+    "bower_components",
+    "component.json",
+    "README.md",
+    ".gitignore",
+    "CHANGELOG.md",
+    "README.md",
+    "demo"
+  ]
+}
