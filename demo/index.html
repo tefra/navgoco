@@ -19,6 +19,7 @@
 $(document).ready(function() {
 	// Initialize navgoco with default options
 	$("#demo1").navgoco({
+		storageType: 'local',
 		caretHtml: '',
 		accordion: false,
 		openClass: 'open',
@@ -49,7 +50,10 @@ $(document).ready(function() {
 </script>
 <script type="text/javascript" id="demo2-javascript">
 $(document).ready(function() {
-	$("#demo2").navgoco({accordion: true});
+	$("#demo2").navgoco({
+		storageType: 'local',
+		accordion: true
+	});
 });
 </script>
 	</head>
