@@ -284,7 +284,7 @@
 				args = Array.prototype.slice.call(arguments, 1);
 		} else {
 			options = $.extend({}, $.fn.navgoco.defaults, options || {});
-			if (!$.cookie) {
+			if (!$.cookie && options.storageType === 'cookie') {
 				options.save = false;
 			}
 		}
