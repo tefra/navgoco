@@ -191,8 +191,7 @@
 					var $str = JSON.stringify(cookie);
 					$.cookie(this.options.cookie.name, $str, this.options.cookie);
 				}
-
-
+				
 			}
 		},
 		/**
