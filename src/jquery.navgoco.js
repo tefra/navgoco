@@ -188,10 +188,9 @@
 					sessionStorage.setItem(this.options.cookie.name, $strLocal);
 				} else {
 					cookie[this.uuid] = this.state = save;
-					var $str = JSON.stringify(cookie);
-					$.cookie(this.options.cookie.name, $str, this.options.cookie);
+					$.cookie(this.options.cookie.name, JSON.stringify(cookie), this.options.cookie);
 				}
-				
+
 			}
 		},
 		/**
@@ -199,20 +198,20 @@
 		 * navgoco menus so the read happens only once and stored in the global `cookie` var.
 		 */
 		_load: function() {
-			//console.log(cookie[this.uuid]);
 			if (this.options.save) {
 
 				if(this.options.storageType === 'local' && typeof(Storage) !== "undefined"){
 					var dataStrg =  sessionStorage.getItem(this.options.cookie.name);
 					var lclStorage = (dataStrg && dataStrg !== 'undefined') ? JSON.parse(dataStrg) : {};
 					this.state = lclStorage.hasOwnProperty(this.uuid) ? lclStorage[this.uuid] : {};
-				} else if (cookie === null && this.options.storageType === 'cookie') {
-					var data = $.cookie(this.options.cookie.name),
+				} else if(this.options.storageType === 'cookie') {
+					if (cookie === null) {
+						var data = $.cookie(this.options.cookie.name);
 						cookie = (data) ? JSON.parse(data) : {};
-					this.state = cookie.hasOwnProperty(this.uuid) ? cookie[this.uuid] : {};
-				} else {
+					}
 					this.state = cookie.hasOwnProperty(this.uuid) ? cookie[this.uuid] : {};
 				}
+
 
 			}
 		},
