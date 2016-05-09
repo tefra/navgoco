@@ -4,6 +4,8 @@
  *
  * Copyright (c) 2014 Chris T (@tefra)
  * BSD - https://github.com/tefra/navgoco/blob/master/LICENSE-BSD
+ *
+ * THIS IS A FORK
  */
 (function($) {
 
@@ -170,6 +172,7 @@
 		 * saved with a cookie. For size reasons only the open sub-menus indexes are stored.		 *
 		 */
 		_save: function() {
+
 			if (this.options.save) {
 				var save = {};
 				for (var key in this.state) {
@@ -177,8 +180,17 @@
 						save[key] = 1;
 					}
 				}
-				cookie[this.uuid] = this.state = save;
-				$.cookie(this.options.cookie.name, JSON.stringify(cookie), this.options.cookie);
+				//save data with a cookie or localStorage
+				if(this.options.storageType === 'local' && typeof(Storage) !== "undefined"){
+					lclStorage = (lclStorage === null) ? {}: lclStorage;
+					lclStorage[this.uuid] = this.state = save;
+					var $strLocal = JSON.stringify(lclStorage);
+					sessionStorage.setItem(this.options.cookie.name, $strLocal);
+				} else {
+					cookie[this.uuid] = this.state = save;
+					$.cookie(this.options.cookie.name, JSON.stringify(cookie), this.options.cookie);
+				}
+
 			}
 		},
 		/**
@@ -187,11 +199,20 @@
 		 */
 		_load: function() {
 			if (this.options.save) {
-				if (cookie === null) {
-					var data = $.cookie(this.options.cookie.name);
-					cookie = (data) ? JSON.parse(data) : {};
+
+				if(this.options.storageType === 'local' && typeof(Storage) !== "undefined"){
+					var dataStrg =  sessionStorage.getItem(this.options.cookie.name);
+					var lclStorage = (dataStrg && dataStrg !== 'undefined') ? JSON.parse(dataStrg) : {};
+					this.state = lclStorage.hasOwnProperty(this.uuid) ? lclStorage[this.uuid] : {};
+				} else if(this.options.storageType === 'cookie') {
+					if (cookie === null) {
+						var data = $.cookie(this.options.cookie.name);
+						cookie = (data) ? JSON.parse(data) : {};
+					}
+					this.state = cookie.hasOwnProperty(this.uuid) ? cookie[this.uuid] : {};
 				}
-				this.state = cookie.hasOwnProperty(this.uuid) ? cookie[this.uuid] : {};
+
+
 			}
 		},
 		/**
@@ -263,7 +284,7 @@
 				args = Array.prototype.slice.call(arguments, 1);
 		} else {
 			options = $.extend({}, $.fn.navgoco.defaults, options || {});
-			if (!$.cookie) {
+			if (!$.cookie && options.storageType === 'cookie') {
 				options.save = false;
 			}
 		}
@@ -285,7 +306,8 @@
 	 *
 	 * @type {Object}
 	 */
-	var cookie = null;
+	var cookie = null,
+		lclStorage = null;
 
 	/**
 	 * Default navgoco options
@@ -293,6 +315,7 @@
 	 * @type {Object}
 	 */
 	$.fn.navgoco.defaults = {
+		storageType: 'cookie',
 		caretHtml: '',
 		accordion: false,
 		openClass: 'open',

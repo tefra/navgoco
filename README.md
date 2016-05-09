@@ -104,6 +104,14 @@ Preserve expanded sub-menus between session. If jquery.cookie is not included it
 
 ----------
 
+#### storageType:
+  * **Type:** `string`
+  * **Default:** `cookie`
+
+Choose the storage type you want between a cookie and an html session storage : 'cookie' or 'local'
+
+----------
+
 #### cookie:
   * **Type:** `object`
     * `name`: Cookie name
