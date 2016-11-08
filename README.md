@@ -135,7 +135,7 @@ With the options you can also pass callback functions to extend the plugin's fun
 This callback is executed before the plugin's main procedure when clicking links.
  * **Parameters**
    * `Event`: `Event Object`
-   * `Submenu`: False if the clicked link is a leaf or the next `sub-menu` if link is a branch.
+   * `Submenu`: `False` if the clicked link is a leaf or the next `sub-menu` if link is a branch.
 
 ----------
 
